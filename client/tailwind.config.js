@@ -1,8 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          50:  '#ecfeff',
+          100: '#cffafe',
+          300: '#7dd3fc',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+        },
+        accent: {
+          400: '#a78bfa',
+          500: '#8b5cf6',
+        },
+      },
+      boxShadow: {
+        soft: '0 10px 30px -12px rgba(2,132,199,.25)',
+        card: '0 6px 20px -10px rgba(17,24,39,.25)',
+      },
+      borderRadius: { xl2: '1.25rem' },
+    },
   },
+  plugins: [],
 };
-
