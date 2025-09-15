@@ -1,0 +1,8 @@
+{
+  "name": "Schedule + News Dashboard",
+  "short_name": "Dash",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": []
+}
+
