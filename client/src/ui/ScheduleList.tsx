@@ -41,7 +41,9 @@ export const ScheduleList: React.FC<Props> = ({ items, loading }) => {
             key={`${ev.title}-${ev.startISO}`}
             className={
               "rounded-lg border p-3 dark:border-gray-700 " +
-              (now ? "border-blue-500 bg-blue-50 dark:bg-blue-950/30" : "bg-white dark:bg-gray-800")
+              (now
+                ? "border-brand-600 bg-brand-50 pl-3.5 ring-1 ring-brand-100 dark:bg-gray-900"
+                : "bg-white dark:bg-gray-800")
             }
           >
             <div className="flex items-baseline justify-between gap-2">
@@ -49,14 +51,17 @@ export const ScheduleList: React.FC<Props> = ({ items, loading }) => {
                 {formatTimeRange(ev.startISO, ev.endISO, ev.allDay)}
               </div>
               {ev.location && (
-                <div className="text-xs text-gray-500">{ev.location}</div>
+                <div className="rounded bg-accent-400/10 px-2 py-0.5 text-xs font-medium text-accent-500">
+                  {ev.location}
+                </div>
               )}
             </div>
-            <div className="mt-0.5 text-base font-medium">{ev.title}</div>
+            <div className="mt-0.5 text-base font-semibold text-brand-700 dark:text-brand-300">
+              {ev.title}
+            </div>
           </li>
         );
       })}
     </ul>
   );
 };
-

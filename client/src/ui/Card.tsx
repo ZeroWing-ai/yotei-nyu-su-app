@@ -9,9 +9,9 @@ type Props = {
 
 export const Card: React.FC<Props> = ({ title, action, children, error }) => {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3 dark:border-gray-700">
-        <h2 className="text-base font-semibold">{title}</h2>
+    <div className="rounded-xl2 border border-gray-200 bg-white shadow-card dark:border-gray-700 dark:bg-gray-800">
+      <div className="flex items-center justify-between border-b border-brand-100 bg-gradient-to-r from-brand-50 to-accent-50 px-4 py-3 dark:border-gray-700 dark:from-gray-800 dark:to-gray-800">
+        <h2 className="text-base font-semibold text-brand-700 dark:text-white">{title}</h2>
         {action}
       </div>
       <div className="p-4">
@@ -26,4 +26,3 @@ export const Card: React.FC<Props> = ({ title, action, children, error }) => {
     </div>
   );
 };
-

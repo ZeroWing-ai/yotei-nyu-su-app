@@ -35,17 +35,18 @@ export const NewsList: React.FC<Props> = ({ items, loading }) => {
       {items.map((n) => (
         <li key={n.link} className="group">
           <a
-            className="text-base font-medium text-blue-700 underline-offset-2 hover:underline dark:text-blue-400"
+            className="text-base font-semibold text-brand-600 underline-offset-2 hover:text-accent-500 hover:underline dark:text-brand-300"
             href={n.link}
             target="_blank"
             rel="noreferrer"
           >
             {n.title}
           </a>
-          <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            <span>{n.source}</span>
-            <span className="px-1">•</span>
-            <span>{toRelativeTime(n.isoDate)}</span>
+          <div className="mt-1 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+            <span className="rounded-full bg-brand-50 px-2 py-0.5 font-medium text-brand-700 dark:bg-gray-700 dark:text-gray-200">
+              {n.source}
+            </span>
+            <span className="text-gray-400">{toRelativeTime(n.isoDate)}</span>
           </div>
           {n.summary && (
             <p className="mt-1 text-sm text-gray-700 dark:text-gray-200 line-clamp-3">
@@ -57,4 +58,3 @@ export const NewsList: React.FC<Props> = ({ items, loading }) => {
     </ul>
   );
 };
-

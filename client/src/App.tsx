@@ -70,14 +70,16 @@ export const App: React.FC = () => {
     <div className="mx-auto max-w-6xl p-4">
       {/* ヘッダー */}
       <header className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-        <h1 className="text-xl font-bold">{todayLabel}</h1>
+        <h1 className="bg-gradient-to-r from-brand-600 to-accent-500 bg-clip-text text-xl font-extrabold text-transparent">
+          {todayLabel}
+        </h1>
         <button
           onClick={onRefresh}
           disabled={refreshing}
-          className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium shadow-sm hover:bg-gray-50 disabled:opacity-60 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="inline-flex items-center gap-2 rounded-md border border-brand-600 bg-brand-600 px-3 py-1.5 text-sm font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-accent-400 disabled:opacity-60"
         >
           {refreshing ? (
-            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
+            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/80 border-t-transparent" />
           ) : (
             <span className="inline-block h-4 w-4">🔄</span>
           )}
@@ -111,7 +113,7 @@ export const App: React.FC = () => {
               action={
                 <button
                   onClick={() => loadNews(k, true)}
-                  className="rounded-md border border-gray-300 bg-white px-2 py-1 text-xs shadow-sm hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  className="rounded-md border border-brand-600 bg-brand-600 px-2 py-1 text-xs font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
                 >
                   再取得
                 </button>
