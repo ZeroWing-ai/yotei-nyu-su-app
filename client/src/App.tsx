@@ -3,6 +3,7 @@ import { Card } from "./ui/Card";
 import { Tabs, TabKey } from "./ui/Tabs";
 import { NewsList, NewsItem } from "./ui/NewsList";
 import { ScheduleList, ScheduleItem } from "./ui/ScheduleList";
+import { AddScheduleForm } from "./ui/AddScheduleForm";
 import { apiBase, formatTodayHeader } from "./lib/time";
 
 type FetchState<T> = {
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
   );
   const [schedule, setSchedule] = useState<FetchState<ScheduleItem[]>>({ ...initialSchedule });
   const [refreshing, setRefreshing] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   const todayLabel = useMemo(() => formatTodayHeader(new Date()), []);
 
@@ -90,7 +92,27 @@ export const App: React.FC = () => {
       {/* レイアウト：モバイル縦、PCは左右 */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* 左：今日の予定 */}
-        <Card title="今日の予定" error={schedule.error || null}>
+        <Card
+          title="今日の予定"
+          error={schedule.error || null}
+          action={
+            <button
+              onClick={() => setAdding((v) => !v)}
+              className="rounded-md border border-green-600 bg-green-600 px-3 py-1 text-sm font-semibold text-white shadow-soft hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
+            >
+              {adding ? "閉じる" : "予定を追加"}
+            </button>
+          }
+        >
+          {adding && (
+            <AddScheduleForm
+              onCreated={async () => {
+                setAdding(false);
+                await loadSchedule(true);
+              }}
+              onCancel={() => setAdding(false)}
+            />
+          )}
           <ScheduleList items={schedule.data} loading={schedule.loading} />
         </Card>
 

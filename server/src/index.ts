@@ -3,7 +3,7 @@ import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 import { getNews } from "./rss";
-import { getTodaySchedule } from "./calendar";
+import { getTodaySchedule, createScheduleEvent } from "./calendar";
 import { NewsCategory } from "./types";
 
 // .env をプロジェクトルート優先で読み込み（次に server/.env）
@@ -53,7 +53,18 @@ app.get("/api/schedule/today", async (req, res) => {
   }
 });
 
+// 予定追加: Googleカレンダー設定時のみ
+app.post("/api/schedule", async (req, res) => {
+  try {
+    const created = await createScheduleEvent(req.body);
+    res.status(201).json(created);
+  } catch (e: any) {
+    console.error("/api/schedule (create) failed", e);
+    const status = e?.status || 500;
+    res.status(status).json({ error: e?.message || "failed to create event" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`API server listening on http://localhost:${PORT}`);
 });
-

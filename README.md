@@ -14,7 +14,7 @@ npm run dev            # http://localhost:5173 でフロント、http://localhos
 
 ## 機能概要
 
-- 左：今日の予定（Google/ICS/モック。初期実装はICS+モック、GoogleはTODO）
+- 左：今日の予定（Google/ICS/モック。Google連携あり・予定追加対応）
 - 右：ニュース（タブ切替：AI／経済／イケハヤのRSS）
 - 未設定でもモック表示。部分失敗OK、全滅時もモックで返却。
 - 「更新」ボタンで `force=true` 再取得。ローディングはスケルトン表示。
@@ -39,9 +39,18 @@ CACHE_TTL_SECONDS=300
 ## 開発メモ
 
 - クライアント: Vite(5173) + React + TypeScript + Tailwind v4（`@tailwindcss/postcss` + `autoprefixer`）
-- サーバー: Express(8787) `/api/news`, `/api/schedule/today`
-- RSS: `rss-parser`、ICS: `ical.js` を使用（Googleカレンダーは TODO）
+- サーバー: Express(8787) `/api/news`, `/api/schedule/today`, `POST /api/schedule`
+- RSS: `rss-parser`、ICS: `ical.js`、Googleカレンダー（サービスアカウント）
 - キャッシュ: サーバー内メモリにカテゴリ/種別ごとにTTL（デフォルト300秒）
+
+### Googleカレンダー連携（Service Account想定）
+1. Google Cloud でサービスアカウントを作成し、鍵（JSON）を発行。
+2. 対象のカレンダーをサービスアカウントのメールアドレスに「共有」（閲覧/編集権限）。
+3. `.env` に以下を設定：
+   - `GOOGLE_CREDENTIALS_JSON` … サービスアカウントのJSON文字列（`client_email`/`private_key`を含む）
+   - `GOOGLE_CALENDAR_ID` … 共有したカレンダーID（例: `primary` または カレンダーのID）
+4. 以上で `/api/schedule/today` がGoogleから今日の予定を取得し、`POST /api/schedule` で予定追加が可能になります。
+   - 未設定時はICS→モックへフォールバック、追加APIは501を返します。
 
 ## スクリプト
 
@@ -63,6 +72,4 @@ server/  (Express API)
 
 ## 既知の制限
 
-- Googleカレンダー連携は TODO（型とTODOコメントのみ設置）。
 - ICS の繰り返し予定の完全展開は簡易対応（一般的ケースで動作）。
-

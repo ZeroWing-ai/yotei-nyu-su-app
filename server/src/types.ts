@@ -16,5 +16,12 @@ export type ScheduleItem = {
   allDay?: boolean;
 };
 
-export type NewsCategory = "ai" | "economy" | "ikehaya";
+export type CreateScheduleRequest = {
+  title: string;
+  startISO: string; // クライアントでISO化（datetime-local等）
+  endISO: string;
+  location?: string;
+  allDay?: boolean;
+};
 
+export type NewsCategory = "ai" | "economy" | "ikehaya";
