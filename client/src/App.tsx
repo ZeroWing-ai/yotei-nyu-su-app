@@ -100,7 +100,7 @@ export const App: React.FC = () => {
           action={<Tabs value={tab} onChange={(k) => setTab(k)} />}
           error={news[tab].error || null}
         >
-          <NewsList items={news[tab].data} loading={news[tab].loading} />
+          <NewsList items={news[tab].data} loading={news[tab].loading} tone={tab} />
         </Card>
       </div>
 
@@ -113,13 +113,20 @@ export const App: React.FC = () => {
               action={
                 <button
                   onClick={() => loadNews(k, true)}
-                  className="rounded-md border border-brand-600 bg-brand-600 px-2 py-1 text-xs font-semibold text-white shadow-soft hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
+                  className={
+                    "rounded-md px-2 py-1 text-xs font-semibold text-white shadow-soft focus:outline-none focus:ring-2 focus:ring-accent-400 " +
+                    (k === "ai"
+                      ? "bg-blue-600 hover:bg-blue-700 border border-blue-600"
+                      : k === "economy"
+                      ? "bg-green-600 hover:bg-green-700 border border-green-600"
+                      : "bg-red-600 hover:bg-red-700 border border-red-600")
+                  }
                 >
                   再取得
                 </button>
               }
             >
-              <NewsList items={news[k].data} loading={news[k].loading} />
+              <NewsList items={news[k].data} loading={news[k].loading} tone={k} />
             </Card>
           ))}
       </div>

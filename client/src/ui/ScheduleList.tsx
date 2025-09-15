@@ -42,7 +42,7 @@ export const ScheduleList: React.FC<Props> = ({ items, loading }) => {
             className={
               "rounded-lg border p-3 dark:border-gray-700 " +
               (now
-                ? "border-brand-600 bg-brand-50 pl-3.5 ring-1 ring-brand-100 dark:bg-gray-900"
+                ? "border-green-600 bg-green-50 pl-3.5 ring-1 ring-green-100 dark:bg-gray-900"
                 : "bg-white dark:bg-gray-800")
             }
           >
@@ -56,7 +56,7 @@ export const ScheduleList: React.FC<Props> = ({ items, loading }) => {
                 </div>
               )}
             </div>
-            <div className="mt-0.5 text-base font-semibold text-brand-700 dark:text-brand-300">
+            <div className="mt-0.5 text-base font-semibold text-green-700 dark:text-green-400">
               {ev.title}
             </div>
           </li>
